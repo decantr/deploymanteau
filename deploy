@@ -13,10 +13,10 @@ stagit-index "$repos"/* > index.html
 for i in "$repos"/*; do
 	j=$(basename "$i" .git)
 
-	[ -d $j ] || mkdir $j
-	cd $j || exit 1
+	[ -d "$j" ] || mkdir "$j"
+	cd "$j" || exit 1
 
-	stagit $i
+	stagit "$i"
 
 	cd ..
 done
