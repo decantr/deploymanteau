@@ -1,0 +1,61 @@
+body {
+	background-color: #191a1a !important;
+	color: #e7e6e5 !important;
+	font-family: monospace;
+	margin: 2em;
+}
+
+a {
+	color: #5c8bc2;
+	text-decoration: none;
+}
+
+h1 {
+	margin: 0;
+}
+
+img {
+	vertical-align: middle;
+}
+
+table td {
+  /* white-space: nowrap; */
+  vertical-align: top;
+	padding: 0 0.6em 0 0;
+}
+
+#branches tbody tr:hover,
+#tags tbody tr:hover,
+#index tbody tr:hover,
+#log tbody tr:hover,
+#files tbody tr:hover {
+	background-color: #282a2e;
+}
+
+.desc {
+	color: #969896;
+}
+
+hr {
+	border: 0;
+	border-top: 3px solid #969896;
+	height: 3px;
+}
+
+#log tbody tr td.num:nth-child(4) {
+	color: #f0c674;
+}
+
+.A,
+span.i,
+pre a.i,
+#log tbody tr td.num:nth-child(5) {
+	color: #b5bd68;
+}
+
+.D,
+span.d,
+pre a.d,
+#log tbody tr td.num:nth-child(6) {
+	color: #cc6666;
+}
