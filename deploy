@@ -13,7 +13,7 @@ cp -r lib/ "$www"
 cd $www || exit 1
 
 stagit-index "$repos"/* > index.html
-ln -s lib/style.css .
+[ -h style.css ] || ln -s lib/style.css .
 
 for i in "$repos"/*; do
 	j=$(basename "$i" .git)
@@ -22,7 +22,7 @@ for i in "$repos"/*; do
 	cd "$j" || exit 1
 
 	stagit "$i"
-	ln -s ../lib/style.css .
+	[ -h style.css ] || ln -s ../lib/style.css .
 
 	cd ..
 done
