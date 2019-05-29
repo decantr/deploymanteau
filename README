@@ -1,0 +1,9 @@
+website
+=======
+
+tool to attempt to automate the deployment of a static website using
+ the following tools:
+
+ * stagit
+ * quark
+ * cron / systemd
