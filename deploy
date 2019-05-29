@@ -6,6 +6,7 @@
 repos="/srv/git"
 www="/srv/www"
 
+[ -d "$www" ] || ( echo "folder does not exist!" && exit 1 )
 cd $www || exit 1
 
 stagit-index "$repos"/* > index.html
