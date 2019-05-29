@@ -1,9 +1,10 @@
-website
-=======
+deploymanteau
+=============
 
-tool to attempt to automate the deployment of a static website using
- the following tools:
+A collection of tools to help automate the deployment of a static website
+ using the following programs:
 
- * stagit
- * quark
- * cron / systemd
+* stagit
+* darkhttpd / quark
+* cron / systemd
+
