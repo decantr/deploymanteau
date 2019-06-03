@@ -1,3 +1,26 @@
 #!/bin/sh
 #
 # tool to automate the adding of a new repository
+
+owner="$(whoami)"
+url="$(hostname)"
+desc=""
+
+# get owner
+printf "::  Owner [$owner] : "
+read -r $REPLY
+[ "$REPLY" = "" ] || owner=$REPLY
+
+# get url
+printf "::  URL [$url] : "
+read -r $REPLY
+[ "$REPLY" = "" ] || url=$REPLY
+
+# get description
+printf "::  Description : "
+read -r $REPLY
+[ "$REPLY" = "" ] || desc=$REPLY
+
+echo $owner
+echo $url
+echo $desc
