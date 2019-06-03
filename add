@@ -2,16 +2,16 @@
 #
 # tool to automate the adding of a new repository
 
+# get the repo url
 repo="$1"
 [ "$repo" = "" ] && printf "::  Repo location: " && read -r repo
 
+# get the repo
 name=$(basename "$repo")
 [ -d "$name" ] || git clone --bare "$repo" || exit 1
 
-owner="$(whoami)"
-desc=""
-
 # get owner
+owner="$(whoami)"
 printf "::  Owner [%s] : " "$owner"
 read -r REPLY
 [ "$REPLY" = "" ] || owner=$REPLY
@@ -25,10 +25,12 @@ url="git://$host/$name"
 echo "::  $url"
 
 # get description
+desc=""
 printf "::  Description : "
 read -r REPLY
 [ "$REPLY" = "" ] || desc=$REPLY
 
+# add the metadata to the repo
 echo "$owner" > "$name"/owner
 echo "$url" > "$name"/url
 echo "$desc" > "$name"/description
