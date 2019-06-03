@@ -24,7 +24,7 @@ for i in "$repos"/*/; do
 	j=$(basename "$i" .git)
 
 	[ -d "$j" ] || mkdir "$j"
-	cd "$j" || exit 1
+	cd "$j" || continue
 
 	# generate repo pages
 	stagit "$i"
