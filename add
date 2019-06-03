@@ -2,6 +2,11 @@
 #
 # tool to automate the adding of a new repository
 
+repo="$1"
+[ "$repo" = "" ] && printf "::  Repo location: " && read -r repo
+
+git clone --bare "$repo" || exit 1
+
 owner="$(whoami)"
 url="$(hostname)"
 desc=""
