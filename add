@@ -5,7 +5,8 @@
 repo="$1"
 [ "$repo" = "" ] && printf "::  Repo location: " && read -r repo
 
-git clone --bare "$repo" || exit 1
+name=$(basename "$repo")
+[ -d "$name" ] || git clone --bare "$repo" || exit 1
 
 owner="$(whoami)"
 url="$(hostname)"
