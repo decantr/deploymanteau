@@ -15,7 +15,7 @@ cd $www || exit 1
 stagit-index "$repos"/* > index.html
 [ -h style.css ] || ln -s lib/style.css .
 
-for i in "$repos"/*; do
+for i in "$repos"/*/; do
 	j=$(basename "$i" .git)
 
 	[ -d "$j" ] || mkdir "$j"
