@@ -3,24 +3,30 @@
 # tool to attempt to automate the deployment of
 # a static website
 
+# where are the repos kept
 repos="/srv/git"
+# where should the html files be
 www="/srv/www"
 
+# if the directory doesn't exist, exit
 [ -d "$www" ] || ( echo "folder does not exist!" && exit 1 )
 
+# copy all lib files over
 cp -r lib/ "$www"
-
 cd $www || exit 1
 
+# create the landing page
 stagit-index "$repos"/* > index.html
 [ -h style.css ] || ln -s lib/style.css .
 
+# for all the directories in $repos folder
 for i in "$repos"/*/; do
 	j=$(basename "$i" .git)
 
 	[ -d "$j" ] || mkdir "$j"
 	cd "$j" || exit 1
 
+	# generate repo pages
 	stagit "$i"
 	[ -h style.css ] || ln -s ../lib/style.css .
 
