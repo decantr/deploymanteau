@@ -14,17 +14,17 @@ desc=""
 
 # get owner
 printf "::  Owner [%s] : " "$owner"
-read -r $REPLY
+read -r REPLY
 [ "$REPLY" = "" ] || owner=$REPLY
 
 # get url
 printf "::  URL [%s] : " "$url"
-read -r $REPLY
+read -r REPLY
 [ "$REPLY" = "" ] || url=$REPLY
 
 # get description
 printf "::  Description : "
-read -r $REPLY
+read -r REPLY
 [ "$REPLY" = "" ] || desc=$REPLY
 
 echo "$owner" > "$name"/owner
