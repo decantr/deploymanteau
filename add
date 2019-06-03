@@ -34,3 +34,12 @@ read -r REPLY
 echo "$owner" > "$name"/owner
 echo "$url" > "$name"/url
 echo "$desc" > "$name"/description
+
+# get local repos location
+path="/srv/git/"
+printf "::  Path [%s] : " "$path"
+read -r REPLY
+[ "$REPLY" = "" ] || path="$REPLY"
+
+# move to the git file path
+mv "$name" "$path"
