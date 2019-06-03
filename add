@@ -27,6 +27,6 @@ printf "::  Description : "
 read -r $REPLY
 [ "$REPLY" = "" ] || desc=$REPLY
 
-echo $owner > "$name"/owner
-echo $url > "$name"/url
-echo $desc > "$name"/description
+echo "$owner" > "$name"/owner
+echo "$url" > "$name"/url
+echo "$desc" > "$name"/description
