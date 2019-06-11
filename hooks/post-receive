@@ -1,8 +1,8 @@
 #!/bin/sh
 
 src="$(pwd)"
-name="$(basename $src)"
-dst="LOCATION${name%.*}"
+dst="LOCATION"
+name="$(basename "$src" .git)"
 
 mkdir -p "$dst"
 cd "$dst" || exit 1
