@@ -19,11 +19,6 @@ rep="$1"
 # update the landing page
 stagit-index "$repos"/* > index.html
 
-# for all the directories in $repos folder
-j=$(basename "$rep" .git)
-
-[ -d "$j" ] || mkdir "$j"
-cd "$j" || { echo "::  Could not create folder!" && exit 1; }
-
 # generate repo pages
+cd "$(basename "$rep" .git)"
 stagit "$repos/$rep"
