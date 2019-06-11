@@ -1,10 +1,10 @@
 deploymanteau
 =============
-
 A collection of tools to help automate the deployment of a static website
- using the following programs:
+ using stagit to create static HTML pages of the repos to be hosted by a
+ simple HTTP server such as darkhttpd or quark.
 
-* stagit
-* darkhttpd / quark
-* cron / systemd
-
+This program is broken down into three key functions
+	* add    - add a new repo to be monitored
+	* deploy - refresh all of the repos
+	* update - update a single repo passed as a paramater
