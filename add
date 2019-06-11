@@ -10,6 +10,9 @@ repo="$1"
 name=$(basename "$repo")
 [ -d "$name" ] || git clone --bare "$repo" || exit 1
 
+# if the git repo is a local file it will be cloned as $name.git
+[ -d "$name" ] || name="$name.git"
+
 # get owner
 owner="$(whoami)"
 printf "::  Owner [%s] : " "$owner"
