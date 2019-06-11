@@ -4,7 +4,7 @@ src="$(pwd)"
 dst="LOCATION"
 name="$(basename "$src" .git)"
 
-mkdir -p "$dst"
+[ -d "$dst/$name" ] || mkdir -p "$dst/$name"
 cd "$dst" || exit 1
 stagit "$src"
 ln -sf "log.html" "index.html"
