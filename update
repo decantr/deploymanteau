@@ -18,7 +18,6 @@ rep="$1"
 
 # update the landing page
 stagit-index "$repos"/* > index.html
-[ -h style.css ] || ln -s lib/style.css .
 
 # for all the directories in $repos folder
 j=$(basename "$rep" .git)
@@ -28,4 +27,3 @@ cd "$j" || { echo "::  Could not create folder!" && exit 1; }
 
 # generate repo pages
 stagit "$repos/$rep"
-[ -h style.css ] || ln -s ../lib/style.css .

@@ -11,13 +11,12 @@ www="/srv/www"
 # if the directory doesn't exist, exit
 [ -d "$www" ] || ( echo "folder does not exist!" && exit 1 )
 
-# copy all lib files over
-cp -r lib/ "$www"
+# copy all style.css files over
+cp -r style.css "$www"
 cd $www || exit 1
 
 # create the landing page
 stagit-index "$repos"/* > index.html
-[ -h style.css ] || ln -s lib/style.css .
 
 # for all the directories in $repos folder
 for i in "$repos"/*/; do
@@ -28,7 +27,7 @@ for i in "$repos"/*/; do
 
 	# generate repo pages
 	stagit "$i"
-	[ -h style.css ] || ln -s ../lib/style.css .
+	[ -h style.css ] || ln -s ../style.css .
 
 	cd ..
 done
