@@ -7,8 +7,9 @@ name="$(basename "$src" .git)"
 
 [ -d "$dst/$name" ] || mkdir -p "$dst/$name"
 cd "$dst" || exit 1
+
 stagit "$src"
-ln -sf "log.html" "index.html"
+[ -h index.html ] || ln -s "log.html" "index.html"
 
 cd .. || exit 1
 stagit-index "$repos"/* >index.html
