@@ -1,0 +1,10 @@
+#!/bin/sh
+
+src="$(pwd)"
+name="$(basename $src)"
+dst="LOCATION${name%.*}"
+
+mkdir -p "$dst"
+cd "$dst" || exit 1
+stagit "$src"
+ln -sf "log.html" "index.html"

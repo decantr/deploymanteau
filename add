@@ -37,9 +37,19 @@ echo "$desc" > "$name"/description
 
 # get local repos location
 path="/srv/git/"
-printf "::  Path [%s] : " "$path"
+printf "::  Git files path [%s] : " "$path"
 read -r REPLY
 [ "$REPLY" = "" ] || path="$REPLY"
+
+# get location to put the web file location
+www="/srv/www/"
+printf "::  Web files path [%s] : " "$www"
+read -r REPLY
+[ "$REPLY" = "" ] || www="$REPLY"
+
+# set LOCATION to destination
+sed -e 's,LOCATION,'"$www"',' hooks/post-receive > "$name"/hooks/post-receive
+chmod +x "$name"/hooks/post-receive
 
 # move to the git file path
 mv "$name" "$path"
