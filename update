@@ -1,0 +1,31 @@
+#!/bin/sh
+#
+# tool to update any given repo
+
+# where are the repos kept
+repos="/srv/git"
+# where should the html files be
+www="/srv/www"
+# repo to update
+rep="$1"
+
+# check if rep has been assigned
+[ "$rep" = "" ] && { echo "::  please enter the name of a repo" && exit 1; }
+# check if the repo exists
+[ -d "$repos/$rep" ] || { echo "::  repo \"$rep\" does not exist in $repos" && exit 1; }
+# if the directory doesn't exist, exit
+[ -d "$www" ] || { echo "::  $www does not exist!" && exit 1; }
+
+# update the landing page
+stagit-index "$repos"/* > index.html
+[ -h style.css ] || ln -s lib/style.css .
+
+# for all the directories in $repos folder
+j=$(basename "$rep" .git)
+
+[ -d "$j" ] || mkdir "$j"
+cd "$j" || { echo "::  Could not create folder!" && exit 1; }
+
+# generate repo pages
+stagit "$repos/$rep"
+[ -h style.css ] || ln -s ../lib/style.css .
