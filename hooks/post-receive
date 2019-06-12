@@ -6,7 +6,7 @@ repos="$(cd .. && pwd)"
 name="$(basename "$src" .git)"
 
 [ -d "$dst/$name" ] || mkdir -p "$dst/$name"
-cd "$dst" || exit 1
+cd "$dst/$name" || exit 1
 
 stagit "$src"
 [ -h index.html ] || ln -s "log.html" "index.html"
