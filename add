@@ -33,10 +33,19 @@ printf "::  Description : "
 read -r REPLY
 [ "$REPLY" = "" ] || desc=$REPLY
 
+# get is okay to export
+gitexport=false
+printf ":: Should this be exported?  [Y/n]: "
+read -r REPLY
+if [ "$REPLY" = "" ] || echo "$REPLY" | grep -qwE "^[Yy]$"; then
+	gitexport=true
+fi
+
 # add the metadata to the repo
 echo "$owner" > "$name"/owner
 echo "$url" > "$name"/url
 echo "$desc" > "$name"/description
+$gitexport && touch "$name"/git-daemon-export-ok
 
 # get local repos location
 path="/srv/git/"
