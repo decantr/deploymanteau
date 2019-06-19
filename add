@@ -15,7 +15,7 @@ name=$(basename "$repo")
 
 # get owner
 owner="$(whoami)"
-printf "::  Owner [%s] : " "$owner"
+printf "::  Owner [%s]: " "$owner"
 read -r REPLY
 [ "$REPLY" = "" ] || owner=$REPLY
 
@@ -29,13 +29,13 @@ echo "::  $url"
 
 # get description
 desc=""
-printf "::  Description : "
+printf "::  Description: "
 read -r REPLY
 [ "$REPLY" = "" ] || desc=$REPLY
 
 # get is okay to export
 gitexport=false
-printf ":: Should this be exported?  [Y/n]: "
+printf "::  Should this be exported? [Y/n] "
 read -r REPLY
 if [ "$REPLY" = "" ] || echo "$REPLY" | grep -qwE "^[Yy]$"; then
 	gitexport=true
@@ -49,13 +49,13 @@ $gitexport && touch "$name"/git-daemon-export-ok
 
 # get local repos location
 path="/srv/git/"
-printf "::  Git files path [%s] : " "$path"
+printf "::  Git files path [%s]: " "$path"
 read -r REPLY
 [ "$REPLY" = "" ] || path="$REPLY"
 
 # get location to put the web file location
 www="/srv/www/"
-printf "::  Web files path [%s] : " "$www"
+printf "::  Web files path [%s]: " "$www"
 read -r REPLY
 [ "$REPLY" = "" ] || www="$REPLY"
 
