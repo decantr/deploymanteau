@@ -1,10 +1,11 @@
 deploymanteau
 =============
-A collection of tools to help automate the deployment of a static website
- using stagit to create static HTML pages of the repos to be hosted by a
- simple HTTP server such as darkhttpd or quark.
+A tool to help automate the deployment and upkeep of a static website.
+By using `stagit` to create static HTML pages of the repos they can be easily
+ hosted by a simple HTTP server such as darkhttpd or quark.
 
-This program is broken down into three key functions
-	* add    - add a new repo to be monitored
-	* deploy - refresh all of the repos
-	* update - update a single repo passed as a paramater
+This is all provided via the `dp` command providing the functions as follows;
+	* add     - add a new repo to be monitored
+	* refresh - refresh one or all of the repos (as specified)
+	* update  - update the information of a repo
+	* delete  - delete a repo
