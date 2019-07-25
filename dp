@@ -1,0 +1,23 @@
+#!/bin/sh
+#
+#	TODO
+#	port over from seperate files
+# choose where to deploy to (scp location)
+# configuration file
+
+[ $DPPATHGIT = "" ] && DPPATHGIT="/srv/git/"
+[ $DPPATHWWW = "" ] && DPPATHWWW="/srv/www/"
+
+case "$1" in
+	*) cat << EOF
+dp: deploymanteau is an assistant script for deploying git repos to stagit.
+
+allowed options:
+  add        a
+  remove     b
+  update     c
+  refresh    d
+
+This message can be printed by running the command with no arguements.
+EOF
+esac
