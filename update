@@ -13,8 +13,10 @@ rep="$1"
 [ "$rep" = "" ] && { echo "::  please enter the name of a repo" && exit 1; }
 # check if the repo exists
 [ -d "$repos/$rep" ] || { echo "::  repo \"$rep\" does not exist in $repos" && exit 1; }
-# if the directory doesn't exist, exit
-[ -d "$www" ] || { echo "::  $www does not exist!" && exit 1; }
+# if the directories don't exist, exit
+if [ -d "$www" ] && [ -d "$repos" ]; then
+	echo "::  $www does not exist!" && exit 1;
+fi
 
 # update the landing page
 stagit-index "$repos"/* > index.html
