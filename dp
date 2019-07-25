@@ -63,8 +63,52 @@ addnew() {
 	mv "$name" "$DPPATHGIT"
 }
 
+# refresh repo or all repos if none specified
+refresh() {
+
+	# if the directory doesn't exist, exit
+	# TODO : make "check" function to do this
+	[ -d "$DPPATHWWW" ] || ( echo "folder does not exist!" && exit 1 )
+
+	# copy all style.css files over
+	# TODO : add "setup" function to do this
+	cp -r style.css "$DPPATHWWW"
+	cd "$DPPATHWWW" || exit 1
+
+	# create the landing page
+	stagit-index "$DPPATHGIT"/* > index.html
+
+	if [ "$1" = "" ]; then
+		# for all the directories in $repos folder
+		for i in "$DPPATHGIT"/*/; do
+			j=$(basename "$i" .git)
+
+			[ -d "$j" ] || mkdir "$j"
+			cd "$j" || continue
+
+			# generate repo pages
+			stagit "$i"
+			[ -h style.css ] || ln -s ../style.css .
+
+			cd ..
+		done
+	else
+		j=$(basename "$1" .git)
+
+		# make the directory if it doesn't exist
+		[ -d "$j" ] || mkdir "$j" && cd "$j"
+
+		#	generate the html files
+		stagit "$DPPATHGIT/$j.git"
+		# ensure the style file is present
+		[ -h style.css ] || ln -s ../style.css .
+	fi
+
+}
+
 case "$1" in
 	add) addnew "$2" ;;
+	refresh) refresh "$2" ;;
 	*) cat << EOF
 dp: deploymanteau is an assistant script for deploying git repos to stagit.
 
