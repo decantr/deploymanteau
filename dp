@@ -5,8 +5,8 @@
 # choose where to deploy to (scp location)
 # configuration file
 
-[ $DPPATHGIT = "" ] && DPPATHGIT="/srv/git/"
-[ $DPPATHWWW = "" ] && DPPATHWWW="/srv/www/"
+[ "$DPPATHGIT" = "" ] && DPPATHGIT="/srv/git/"
+[ "$DPPATHWWW" = "" ] && DPPATHWWW="/srv/www/"
 
 # add a new repository
 addnew() {
