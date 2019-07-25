@@ -8,7 +8,63 @@
 [ $DPPATHGIT = "" ] && DPPATHGIT="/srv/git/"
 [ $DPPATHWWW = "" ] && DPPATHWWW="/srv/www/"
 
+# add a new repository
+addnew() {
+	# get the repo url
+	[ "$1" = "" ] && printf "::  Repo location: " && read -r repo
+
+	# get the repo
+	name=$(basename "$1")
+	[ -d "$name" ] || git clone --bare "$1" || exit 1
+
+	# if the git repo is a local file it will be cloned as $name.git
+	[ -d "$name" ] || name="$name.git"
+
+	# get owner
+	owner="$(whoami)"
+	printf "::  Owner [%s] : " "$owner"
+	read -r REPLY
+	[ "$REPLY" = "" ] || owner=$REPLY
+
+	# get url
+	host="$(hostname)"
+	printf "::  Host git://[%s]/%s: " "$host" "$name"
+	read -r REPLY
+	[ "$REPLY" = "" ] || host="$REPLY"
+	url="git://$host/$name"
+	echo "::  $url"
+
+	# get description
+	desc=""
+	printf "::  Description : "
+	read -r REPLY
+	[ "$REPLY" = "" ] || desc=$REPLY
+
+	# add the metadata to the repo
+	echo "$owner" > "$name"/owner
+	echo "$url" > "$name"/url
+	echo "$desc" > "$name"/description
+
+	# get local repos location
+	printf "::  Git files path [%s] : " "$DPPATHGIT"
+	read -r REPLY
+	[ "$REPLY" = "" ] || DPPATHGIT="$REPLY"
+
+	# get location to put the web file location
+	printf "::  Web files path [%s] : " "$DPPATHWWW"
+	read -r REPLY
+	[ "$REPLY" = "" ] || DPPATHWWW="$REPLY"
+
+	# set LOCATION to destination
+	sed -e 's,LOCATION,'"$DPPATHWWW"',' hooks/post-receive > "$name"/hooks/post-receive
+	chmod +x "$name"/hooks/post-receive
+
+	# move to the git file path
+	mv "$name" "$DPPATHGIT"
+}
+
 case "$1" in
+	add) addnew "$2" ;;
 	*) cat << EOF
 dp: deploymanteau is an assistant script for deploying git repos to stagit.
 
