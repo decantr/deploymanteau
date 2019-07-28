@@ -97,7 +97,8 @@ refresh() {
 		j=$(basename "$1" .git)
 
 		# make the directory if it doesn't exist
-		[ -d "$j" ] || mkdir "$j" && cd "$j"
+		[ -d "$j" ] || mkdir "$j"
+		cd "$j" || exit 1
 
 		#	generate the html files
 		stagit "$DPPATHGIT/$j.git"
