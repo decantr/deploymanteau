@@ -117,7 +117,7 @@ update() {
 
 	# if the repo doesn't exist hand it to addnew
 	[ -d "$DPPATHGIT/$name" ] || \
-		echo "::  Repo not found, adding" && addnew "$1" && exit 0
+		{ echo "::  Repo not found, adding" && addnew "$1" && exit 0; }
 
 	# get the repo
 	[ -d "$name" ] || git clone --bare "$1" || exit 1
