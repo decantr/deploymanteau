@@ -120,12 +120,21 @@ update() {
 	# get the repo
 	[ -d "$name" ] || git clone --bare "$1" || exit 1
 
-	# get the files
-	cp "$DPPATHGIT$name/"{description,owner,url} "$name"
-	rm -rf "$DPPATHGIT/$name"
+	# use rsync if avail or use really low iq method
+	if command -v rsync >/dev/null; then
+		# remove the description file as it never seems to be correct
+		rm "$name/description"
+		rsync -a "$name" "$DPPATHGIT"
+		rm -rf "$name"
+	else
+		# get the files
+		cp "$DPPATHGIT$name/"{description,owner,url} "$name"
+		rm -rf "$DPPATHGIT/$name"
 
-	# move to the git file path
-	mv "$name" "$DPPATHGIT"
+		# move to the git file path
+		mv "$name" "$DPPATHGIT"
+	fi
+
 
 	# refresh
 	refresh "$name"
