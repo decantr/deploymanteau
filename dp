@@ -153,6 +153,10 @@ allowed options:
   update     c
   refresh    d
 
+locations:
+  \$DPPATHGIT = $DPPATHGIT
+  \$DPPATHWWW = $DPPATHWWW
+
 This message can be printed by running the command with no arguements.
 EOF
 esac
