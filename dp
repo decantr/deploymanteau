@@ -138,7 +138,6 @@ update() {
 		mv "$name" "$DPPATHGIT"
 	fi
 
-
 	# refresh
 	refresh "$name"
 }
