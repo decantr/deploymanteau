@@ -62,6 +62,7 @@ addnew() {
 
 	# move to the git file path
 	mv "$name" "$DPPATHGIT"
+
 }
 
 # refresh repo or all repos if none specified
@@ -140,6 +141,7 @@ update() {
 
 	# refresh
 	refresh "$name"
+
 }
 
 case "$1" in
