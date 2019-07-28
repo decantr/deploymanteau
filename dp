@@ -1,9 +1,6 @@
 #!/bin/sh
 #
-#	TODO
-#	port over from seperate files
-# choose where to deploy to (scp location)
-# configuration file
+# handle the legwork of mainting and updating static repos
 
 [ "$DPPATHGIT" = "" ] && DPPATHGIT="/srv/git/"
 [ "$DPPATHWWW" = "" ] && DPPATHWWW="/srv/www/"
@@ -69,11 +66,9 @@ addnew() {
 refresh() {
 
 	# if the directory doesn't exist, exit
-	# TODO : make "check" function to do this
 	[ -d "$DPPATHWWW" ] || ( echo "folder does not exist!" && exit 1 )
 
 	# copy all style.css files over
-	# TODO : add "setup" function to do this
 	cp -r style.css "$DPPATHWWW"
 	cd "$DPPATHWWW" || exit 1
 
