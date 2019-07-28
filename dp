@@ -116,7 +116,7 @@ update() {
 	name="$(basename "$1").git"
 
 	# if id doesn't exist add it
-	[ -d "$DPPATHGIT/$name" ] || addnew $1
+	[ -d "$DPPATHGIT/$name" ] || addnew "$1"
 
 	# get the repo
 	[ -d "$name" ] || git clone --bare "$1" || exit 1
@@ -133,7 +133,7 @@ update() {
 		for i in $files; do
 			cp "$DPPATHGIT$name/$i" "$name"
 		done
-		rm -rf "$DPPATHGIT/$name"
+		rm -rf "${DPPATHGIT:?}/${name:?}"
 
 		# move to the git file path
 		mv "$name" "$DPPATHGIT"
