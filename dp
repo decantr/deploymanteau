@@ -115,8 +115,9 @@ update() {
 	# get the repo
 	name="$(basename "$1").git"
 
-	# if id doesn't exist add it
-	[ -d "$DPPATHGIT/$name" ] || addnew "$1"
+	# if the repo doesn't exist hand it to addnew
+	[ -d "$DPPATHGIT/$name" ] || \
+		echo "::  Repo not found, adding" && addnew "$1" && exit 0
 
 	# get the repo
 	[ -d "$name" ] || git clone --bare "$1" || exit 1
