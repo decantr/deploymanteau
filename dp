@@ -10,8 +10,9 @@
 
 # add a new repository
 addnew() {
-	# get the repo url
-	[ "$1" = "" ] && printf "::  Repo location: " && read -r repo
+
+	# require a repo location
+	[ "$1" = "" ] && echo "::  You must specify a repo location " && exit 1
 
 	# get the repo
 	name=$(basename "$1")
