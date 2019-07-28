@@ -128,7 +128,10 @@ update() {
 		rm -rf "$name"
 	else
 		# get the files
-		cp "$DPPATHGIT$name/"{description,owner,url} "$name"
+		files="description owner url"
+		for i in $files; do
+			cp "$DPPATHGIT$name/$i" "$name"
+		done
 		rm -rf "$DPPATHGIT/$name"
 
 		# move to the git file path
