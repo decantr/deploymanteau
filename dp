@@ -106,9 +106,35 @@ refresh() {
 
 }
 
+# update a repo from a local repo
+update() {
+
+	# get the repo
+	name="$(basename "$1").git"
+
+	echo $name
+
+	# if id doesn't exist add it
+	[ -d "$DPPATHGIT/$name" ] || addnew $1
+
+	# get the repo
+	[ -d "$name" ] || git clone --bare "$1" || exit 1
+
+	# get the files
+	cp "$DPPATHGIT$name/"{description,owner,url} "$name"
+	rm -rf "$DPPATHGIT/$name"
+
+	# move to the git file path
+	mv "$name" "$DPPATHGIT"
+
+	# refresh
+	refresh "$name"
+}
+
 case "$1" in
 	add) addnew "$2" ;;
 	refresh) refresh "$2" ;;
+	update) update "$2" ;;
 	*) cat << EOF
 dp: deploymanteau is an assistant script for deploying git repos to stagit.
 
