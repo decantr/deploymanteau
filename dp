@@ -114,8 +114,6 @@ update() {
 	# get the repo
 	name="$(basename "$1").git"
 
-	echo $name
-
 	# if id doesn't exist add it
 	[ -d "$DPPATHGIT/$name" ] || addnew $1
 
