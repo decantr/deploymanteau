@@ -3,7 +3,7 @@
 # handle the legwork of mainting and updating static repos
 
 [ "$DPPATHGIT" = "" ] && DPPATHGIT="/srv/git/"
-[ "$DPPATHWWW" = "" ] && DPPATHWWW="/srv/www/"
+[ "$DPPATHWWW" = "" ] && DPPATHWWW="/srv/www/git"
 
 # add a new repository
 addnew() {
