@@ -4,7 +4,7 @@
 
 [ "$DPPATHGIT" = "" ] && DPPATHGIT="/srv/git/"
 [ "$DPPATHWWW" = "" ] && DPPATHWWW="/srv/www/git"
-[ "$GITNAME" = "" ] && $(whoami)
+[ "$GITNAME" = "" ] && GITNAME="$(whoami)"
 
 # add a new repository
 addnew() {
