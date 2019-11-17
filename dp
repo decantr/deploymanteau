@@ -4,6 +4,7 @@
 
 [ "$DPPATHGIT" = "" ] && DPPATHGIT="/srv/git/"
 [ "$DPPATHWWW" = "" ] && DPPATHWWW="/srv/www/git"
+[ "$GITNAME" = "" ] && $(whoami)
 
 # add a new repository
 addnew() {
@@ -139,18 +140,47 @@ update() {
 
 }
 
+# fetch the latest changes from the repo
+fetch()
+{
+	# if $1 is empty then exit
+	[ "$1" = "" ] && { echo "::  No repo given" && exit 1;}
+
+	# get the repo name
+	name="$(basename "$1").git"
+
+	# get the current sha1
+	current="$(
+		curl -L "https://github.com/$GITNAME/$name" |
+			grep "commit-tease-sha mr-1" |
+			grep -Eo "\b[0-9a-f]{5,40}\b"
+	)"
+
+	cd "$DPPATHGIT/$name" || exit 1
+
+	# check if we have the current comit
+	git rev-list @ -n 1 | grep "$current" &&
+		{ echo "::  Repo up to date" && exit 0;}
+
+	git fetch > /dev/null
+
+	refresh "$name"
+}
+
 case "$1" in
 	add) addnew "$2" ;;
 	refresh) refresh "$2" ;;
 	update) update "$2" ;;
+	fetch) fetch "$2" ;;
 	*) cat << EOF
 dp: deploymanteau is an assistant script for deploying git repos to stagit.
 
 allowed options:
-  add        a
-  remove     b
-  update     c
-  refresh    d
+  add					a
+  remove			b
+  update			c
+  refresh			d
+  fetch				d
 
 locations:
   \$DPPATHGIT = $DPPATHGIT
